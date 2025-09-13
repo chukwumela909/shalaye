@@ -9,10 +9,12 @@ interface ActionButtonsProps {
   convertedAmount?: string;
   mintData?: {
     notes: number;
-    actualAmount: number;
-    premiumAmount: number;
+    actualNotes?: number;
+    actualAmount?: number;
+    bundles?: number;
     totalCost: number;
-    premium: number;
+    bundlePrice?: number;
+    faceValuePerBundle?: number;
   };
 }
 
@@ -32,12 +34,12 @@ export default function ActionButtons({
       return `Hi! I want to exchange ₦${parseFloat(amount).toLocaleString()} to ${selectedCurrency}. Based on your calculator, I should get ${selectedCurrency === "USD" ? "$" : selectedCurrency === "GBP" ? "£" : "€"}${convertedAmount}. Please confirm the rate and let me know how to proceed.`;
     } else {
       if (!mintData) return "";
-      return `Hi! I need mint ₦${selectedDenomination} notes. I want ₦${parseFloat(amount).toLocaleString()} worth, which is ${mintData.notes.toLocaleString()} notes. Your calculator shows total cost of ₦${mintData.totalCost.toLocaleString()} (including ${mintData.premium}% premium). Please confirm and let me know how to proceed.`;
+      return `Hi! I need mint ₦${selectedDenomination} notes. I want ₦${parseFloat(amount).toLocaleString()} worth, which requires ${mintData.bundles} bundle${(mintData.bundles || 0) > 1 ? 's' : ''} (${mintData.actualNotes?.toLocaleString()} notes total). Your calculator shows total cost of ₦${mintData.totalCost.toLocaleString()}. Please confirm and let me know how to proceed.`;
     }
   };
 
-  const whatsappUrl = `https://wa.me/2348123456789?text=${encodeURIComponent(generateMessage())}`;
-  const telegramUrl = `https://t.me/gardencitybdc?text=${encodeURIComponent(generateMessage())}`;
+  const whatsappUrl = `https://wa.me/2349133136912?text=${encodeURIComponent(generateMessage())}`;
+  const telegramUrl = `https://t.me/gagarinexus?text=${encodeURIComponent(generateMessage())}`;
 
   if (!amount) return null;
 

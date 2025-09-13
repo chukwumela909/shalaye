@@ -6,9 +6,9 @@ export default function RatesDisplay() {
 
   // Mock rates - replace with real API call
   const rates = {
-    USD: { buy: 1650, sell: 1670 },
-    GBP: { buy: 2100, sell: 2130 },
-    EUR: { buy: 1800, sell: 1820 }
+    USD: { buy: 1_580, sell: 1_670 },
+    GBP: { buy: 2_160, sell: 2_130 },
+    EUR: { buy: 1_800, sell: 1_820 }
   };
 
   useEffect(() => {

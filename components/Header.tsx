@@ -7,7 +7,7 @@ export default function Header() {
         {/* Logo Only */}
         <div className="flex justify-center mb-8">
           <Image
-            src="/gardencitybdc-logo.png"
+            src="/gardencitybdc.png"
             alt="GardenCityBDC Logo"
             width={200}
             height={10}

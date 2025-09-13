@@ -3,6 +3,8 @@ import CurrencyCalculator from "@/components/CurrencyCalculator";
 import GlobeDemo from "@/components/globe-demo";
 import FAQSection from "@/components/FAQSection";
 import RatesDisplay from "@/components/RatesDisplay";
+import GetInTouchSection from "@/components/GetInTouchSection";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -20,13 +22,13 @@ export default function Home() {
             {/* Left Side - Hero Text */}
             <div className="text-center md:text-left">
               <h1 className="text-[#00D09B] text-4xl md:text-5xl lg:text-6xl font-bold mb-4 font-lato">
-                Trusted FX & Mint Notes
+                Your #1 Currency Hub in the Heart of Port Harcourt
               </h1>
               <p className="text-[#F0F3F7] text-xl md:text-2xl mb-4 font-light">
                 Convert, Calculate, and Buy with Confidence
               </p>
               <p className="text-[#8A919E] text-lg font-medium tracking-wider mb-8">
-                BLACK MARKET FOREX
+                BLACK MARKET EXCHANGE
               </p>
               
               {/* Additional descriptive text */}
@@ -56,6 +58,12 @@ export default function Home() {
       
       {/* FAQ Section */}
       <FAQSection />
+      
+      {/* Get in Touch Section */}
+      <GetInTouchSection />
+      
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

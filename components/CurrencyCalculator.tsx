@@ -12,17 +12,16 @@ export default function CurrencyCalculator() {
 
   // Mock rates - you'll replace these with real rates later
   const forexRates = {
-    USD: 1650,
-    GBP: 2100, 
+    USD: 1580,
+    GBP: 2160, 
     EUR: 1800
   };
 
-  // Mint note premiums (percentage above face value)
-  const mintPremiums = {
-    "100": 8,   // 8% premium for ₦100 notes
-    "200": 5,   // 5% premium for ₦200 notes  
-    "500": 3,   // 3% premium for ₦500 notes
-    "1000": 2   // 2% premium for ₦1000 notes
+  // Mint note bundle prices (1 bundle = 100 notes)
+  const mintBundlePrices = {
+    "200": 33000,   // ₦200 notes: 1 bundle = ₦33k
+    "500": 63000,   // ₦500 notes: 1 bundle = ₦63k
+    "1000": 115000  // ₦1000 notes: 1 bundle = ₦115k
   };
 
   // Forex calculation
@@ -32,23 +31,27 @@ export default function CurrencyCalculator() {
 
   // Mint notes calculation
   const mintCalculation = () => {
-    if (!amount || calculatorType !== "mint") return { notes: 0, totalCost: 0 };
+    if (!amount || calculatorType !== "mint") return { notes: 0, totalCost: 0, bundles: 0 };
     
     const requestedAmount = parseFloat(amount);
     const denomination = parseInt(selectedDenomination);
-    const premium = mintPremiums[selectedDenomination as keyof typeof mintPremiums];
+    const bundlePrice = mintBundlePrices[selectedDenomination as keyof typeof mintBundlePrices];
+    const faceValuePerBundle = denomination * 100; // 100 notes per bundle
     
     const numberOfNotes = Math.floor(requestedAmount / denomination);
-    const actualAmount = numberOfNotes * denomination;
-    const premiumAmount = (actualAmount * premium) / 100;
-    const totalCost = actualAmount + premiumAmount;
+    const numberOfBundles = Math.ceil(numberOfNotes / 100); // Round up to complete bundles
+    const actualNotes = numberOfBundles * 100; // Total notes in complete bundles
+    const actualAmount = actualNotes * denomination; // Face value of actual notes
+    const totalCost = numberOfBundles * bundlePrice;
     
     return {
       notes: numberOfNotes,
+      actualNotes,
       actualAmount,
-      premiumAmount,
+      bundles: numberOfBundles,
       totalCost,
-      premium
+      bundlePrice,
+      faceValuePerBundle
     };
   };
 
@@ -66,7 +69,7 @@ export default function CurrencyCalculator() {
               : "text-[#F0F3F7] hover:bg-[#1E222D]"
           }`}
         >
-          Forex Converter
+          Exchange calculator
         </button>
         <button
           onClick={() => setCalculatorType("mint")}
@@ -83,7 +86,7 @@ export default function CurrencyCalculator() {
       {/* Forex Calculator */}
       {calculatorType === "forex" && (
         <div className="space-y-4">
-          <h2 className="text-[#00D09B] text-2xl font-bold mb-4 text-center">Forex Converter</h2>
+          <h2 className="text-[#00D09B] text-2xl font-bold mb-4 text-center">Exchange calculator</h2>
           
           {/* Amount Input */}
           <div>
@@ -176,7 +179,7 @@ export default function CurrencyCalculator() {
               onChange={(e) => setSelectedDenomination(e.target.value)}
               className="w-full bg-[#131722] border border-[#1E222D] rounded-lg px-4 py-3 text-[#F0F3F7] focus:outline-none focus:border-[#00D09B] text-lg"
             >
-              <option value="100">₦100 notes</option>
+              {/* <option value="100">₦100 notes</option> */}
               <option value="200">₦200 notes</option>
               <option value="500">₦500 notes</option>
               <option value="1000">₦1000 notes</option>
@@ -187,23 +190,37 @@ export default function CurrencyCalculator() {
           {amount && (
             <div className="bg-[#131722] rounded-lg p-4 space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-[#F0F3F7]">Number of notes:</span>
+                <span className="text-[#F0F3F7]">Notes needed:</span>
                 <span className="text-[#00D09B] font-bold text-lg">
                   {mintData.notes.toLocaleString()} notes
                 </span>
               </div>
               
               <div className="flex justify-between items-center">
-                <span className="text-[#F0F3F7]">Actual amount:</span>
+                <span className="text-[#F0F3F7]">Bundles required:</span>
+                <span className="text-[#FFC043] font-bold text-lg">
+                  {mintData.bundles} bundle{mintData.bundles > 1 ? 's' : ''}
+                </span>
+              </div>
+              
+              <div className="flex justify-between items-center">
+                <span className="text-[#F0F3F7]">Actual notes you get:</span>
+                <span className="text-[#F0F3F7] font-medium">
+                  {mintData.actualNotes?.toLocaleString()} notes
+                </span>
+              </div>
+              
+              <div className="flex justify-between items-center">
+                <span className="text-[#F0F3F7]">Face value:</span>
                 <span className="text-[#F0F3F7] font-medium">
                   ₦{mintData.actualAmount?.toLocaleString()}
                 </span>
               </div>
               
               <div className="flex justify-between items-center">
-                <span className="text-[#F0F3F7]">Premium ({mintData.premium}%):</span>
+                <span className="text-[#F0F3F7]">Price per bundle:</span>
                 <span className="text-[#FFC043] font-medium">
-                  ₦{mintData.premiumAmount?.toLocaleString()}
+                  ₦{mintData.bundlePrice?.toLocaleString()}
                 </span>
               </div>
               
@@ -214,6 +231,12 @@ export default function CurrencyCalculator() {
                     ₦{mintData.totalCost?.toLocaleString()}
                   </span>
                 </div>
+              </div>
+              
+              <div className="bg-[#1E222D] rounded p-3 mt-3">
+                <p className="text-[#8A919E] text-xs text-center">
+                  Note: Mint notes are sold in complete bundles of 100 notes each
+                </p>
               </div>
             </div>
           )}

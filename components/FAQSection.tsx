@@ -27,7 +27,7 @@ const faqData: FAQItem[] = [
   {
     id: 4,
     question: "Is there a minimum/maximum purchase amount?",
-    answer: "Minimum purchase: ₦50,000 for forex, ₦20,000 for mint notes. Maximum amounts vary based on availability and current stock. For large transactions (above ₦5 million), please contact us in advance to ensure availability."
+    answer: "Minimum purchase: ₦50,000 for bureau de change, ₦20,000 for mint notes. Maximum amounts vary based on availability and current stock. For large transactions (above ₦5 million), please contact us in advance to ensure availability."
   },
   {
     id: 5,
@@ -47,7 +47,7 @@ const faqData: FAQItem[] = [
   {
     id: 8,
     question: "How long does a transaction take?",
-    answer: "Once payment is confirmed, forex exchanges are typically ready within 30 minutes. Mint notes may take 1-3 hours depending on denomination and quantity requested. Large orders may require 24-48 hours advance notice."
+    answer: "Once payment is confirmed. exchange is swift and ready At transaction point. mints are delievered to address provided. Large amount orders may require 12 hours notice."
   }
 ];
 
@@ -70,7 +70,7 @@ export default function FAQSection() {
             Frequently Asked Questions
           </h2>
           <p className="text-[#F0F3F7] text-lg">
-            Everything you need to know about our forex and mint note services
+            Everything you need to know about our Bureau de change and mint note services
           </p>
         </div>
 
@@ -122,7 +122,7 @@ export default function FAQSection() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
-                href="https://wa.me/2348123456789?text=Hi%2C%20I%20have%20a%20question%20about%20your%20services"
+                href="https://wa.me/2349133136912?text=Hi%2C%20I%20have%20a%20question%20about%20your%20services"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center bg-[#FFC043] hover:bg-[#FFB020] text-[#131722] font-bold py-2 px-4 rounded-lg transition-colors"
@@ -133,7 +133,7 @@ export default function FAQSection() {
                 WhatsApp Support
               </a>
               <a
-                href="https://t.me/gardencitybdc"
+                href="https://t.me/gagarinexus"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center bg-[#00D09B] hover:bg-[#00B087] text-[#131722] font-bold py-2 px-4 rounded-lg transition-colors"

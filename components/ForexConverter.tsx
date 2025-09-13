@@ -16,7 +16,7 @@ export default function ForexConverter() {
 
   return (
     <div className="bg-[#1E222D] rounded-lg p-6 shadow-lg">
-      <h2 className="text-[#00D09B] text-2xl font-bold mb-6 text-center">Forex Converter</h2>
+      <h2 className="text-[#00D09B] text-2xl font-bold mb-6 text-center">Exchange Converter</h2>
       
       <div className="space-y-4 mb-6">
         {/* Amount Input */}
